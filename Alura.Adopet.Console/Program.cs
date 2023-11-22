@@ -1,7 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using Alura.Adopet.Console;
-
+﻿using Alura.Adopet.Console;
 
 Console.ForegroundColor = ConsoleColor.Green;
 try
@@ -21,7 +18,7 @@ try
         case "show":
             var show = new Show();
             var caminhoDoArquivoASerExibido = args[1];
-            show.MostrarDadosDeImportacao(caminhoDoArquivoASerExibido);
+            show.ExibeConteudoDoArquivo(caminhoDoArquivoASerExibido);
             break;
         case "list":
             var list = new List();

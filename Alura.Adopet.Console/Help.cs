@@ -1,8 +1,20 @@
 ﻿namespace Alura.Adopet.Console;
+using System.Reflection;
 using System;
 
+
+[DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informaçãoes de ajuda.\n" +
+                                             "aodnet help <NOME_COMANDO> para acessar a ajuda de um comando específico")]
 internal class Help
 {
+    private Dictionary<string, DocComandoAttribute> docs;
+
+    // expression body constructor
+    public Help() => docs = Assembly.GetExecutingAssembly().GetTypes()
+            .Where(t => t.GetCustomAttributes<DocComandoAttribute>().Any())
+            .Select(t => t.GetCustomAttribute<DocComandoAttribute>()!)
+            .ToDictionary(d => d.Instrucao);
+
     public void ExibeInformacoesDeAjuda(string[] entrada)
     {
         Console.WriteLine("Lista de comandos");
@@ -10,34 +22,24 @@ internal class Help
         // Se não passou mais nenhum argumento mostra help de todos os comandos
         if (entrada.Length == 1)
         {
-            Console.WriteLine("adopet help <parametro> ous simplemente adopet help  " +
-                 "comando que exibe informações de ajuda dos comandos.");
+            Console.WriteLine("adopet help <parametro> ou simplemente adopet help  " +
+                              "comando que exibe informações de ajuda dos comandos.");
             Console.WriteLine("Adopet (1.0) - Aplicativo de linha de comando (CLI).");
             Console.WriteLine("Realiza a importação em lote de um arquivos de pets.");
             Console.WriteLine("Comando possíveis: ");
-            Console.WriteLine($" adopet import <arquivo> comando que realiza a importação do arquivo de pets.");
-            Console.WriteLine($" adopet show   <arquivo> comando que exibe no terminal o conteúdo do arquivo importado." + "\n\n\n\n");
-            Console.WriteLine("Execute 'adopet.exe help [comando]' para obter mais informações sobre um comando." + "\n\n\n");
+
+            foreach (var doc in docs.Values)
+            {
+                Console.WriteLine(doc.Documentacao);
+            }
         }
         else if (entrada.Length == 2)
         {
             var comandoASerExibido = entrada[1];
+            var comando = docs[comandoASerExibido];
 
-            if (comandoASerExibido.Equals("import"))
-            {
-                Console.WriteLine(" adopet import <arquivo> " +
-                    "comando que realiza a importação do arquivo de pets.");
-            }
-            if (comandoASerExibido.Equals("show"))
-            {
-                Console.WriteLine(" adopet show <arquivo> " +
-                    "comando que exibe no terminal o conteúdo do arquivo importado.");
-            }
-            if (comandoASerExibido.Equals("list"))
-            {
-                Console.WriteLine(" adopet list " +
-                    "comando que exibe no terminal o conteúdo do arquivo importado.");
-            }
+            if (docs.ContainsKey(comandoASerExibido)) Console.WriteLine(comando.Documentacao);
+            else Console.WriteLine("Comando inválido.");
         }
     }
 }

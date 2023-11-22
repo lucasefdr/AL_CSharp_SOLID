@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System;
 
+[DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
 internal class List
 {
     HttpClient client;
@@ -16,9 +17,13 @@ internal class List
     public async Task ListaPetsAsync()
     {
         var pets = await ListPetsAsync();
-        foreach (var pet in pets)
+
+        if (pets != null)
         {
-            Console.WriteLine(pet);
+            foreach (var pet in pets)
+            {
+                Console.WriteLine(pet);
+            }
         }
     }
 

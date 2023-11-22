@@ -3,6 +3,7 @@ using System;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
+[DocComando(instrucao: "import", documentacao: "adopet import <arquivo> comando que realiza a importação do arquivo de pets.")]
 internal class Import
 {
     HttpClient client;
@@ -14,24 +15,12 @@ internal class Import
 
     public async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
     {
-        List<Pet> listaDePet = new List<Pet>();
+        LeitorDeArquivo leitor = new();
+        var listaDePet = leitor.RealizaLeitura(caminhoDoArquivoDeImportacao);
 
-        using (StreamReader sr = new StreamReader(caminhoDoArquivoDeImportacao))
-        {
-            while (!sr.EndOfStream)
-            {
-                // separa linha usando ponto e vírgula
-                string[] propriedades = sr.ReadLine().Split(';');
-
-                // cria objeto Pet a partir da separação
-                Pet pet = new Pet(Guid.Parse(propriedades[0]), propriedades[1], TipoPet.Cachorro);
-
-                Console.WriteLine(pet);
-                listaDePet.Add(pet);
-            }
-        }
         foreach (var pet in listaDePet)
         {
+            Console.WriteLine("Importando: " + pet);
             try
             {
                 var resposta = await CreatePetAsync(pet);
