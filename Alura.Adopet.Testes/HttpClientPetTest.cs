@@ -2,7 +2,7 @@ using Alura.Adopet.Console.Services;
 
 namespace Alura.Adopet.Testes;
 
-public class HttpClientPetList
+public class HttpClientPetTest
 {
     [Fact]
     public async Task ListaPetsDeveRetornarUmaListaNaoVazia()
