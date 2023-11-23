@@ -1,13 +1,17 @@
 ﻿using Alura.Adopet.Console;
 using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.Services;
+
 Console.ForegroundColor = ConsoleColor.Green;
+
+var httpClientPet = new HttpClientPet();
 
 var comandosDoSistema = new Dictionary<string, IComando>()
 {
     {"help", new Help()},
-    {"import", new Import()},
+    {"import", new Import(httpClientPet)},
     {"show", new Show()},
-    {"list", new List()}
+    {"list", new List(httpClientPet)}
 };
 
 try

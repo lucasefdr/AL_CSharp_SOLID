@@ -9,6 +9,13 @@ using Alura.Adopet.Console.Services;
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
 internal class List : IComando
 {
+    private readonly HttpClientPet _httpClientPet;
+
+    public List(HttpClientPet httpClientPet)
+    {
+        _httpClientPet = httpClientPet;
+    }
+
     public async Task ExercutarAsync(string[] args)
     {
         await ListaPetsAsync();
@@ -16,8 +23,7 @@ internal class List : IComando
 
     private async Task ListaPetsAsync()
     {
-        var httpListPet = new HttpClientPet();
-        var pets = await httpListPet.ListPetsAsync();
+        var pets = await _httpClientPet.ListPetsAsync();
 
         if (pets != null)
         {
