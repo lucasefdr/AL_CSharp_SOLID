@@ -10,9 +10,6 @@ var comandosDoSistema = new Dictionary<string, IComando>()
     {"list", new List()}
 };
 
-
-
-
 try
 {
     var comando = args[0].Trim();
@@ -20,6 +17,7 @@ try
     if (!comandosDoSistema.ContainsKey(comando)) Console.WriteLine("Comando inválido.");
 
     var comandoDeEntrada = comandosDoSistema[comando];
+
     await comandoDeEntrada.ExercutarAsync(args);
 }
 catch (Exception ex)
