@@ -15,8 +15,8 @@ internal class Show : IComando
 
     private void ExibeConteudoDoArquivo(string caminhoDoArquivoASerExibido)
     {
-        LeitorDeArquivo leitor = new LeitorDeArquivo();
-        var listaDePets = leitor.RealizaLeitura(caminhoDoArquivoASerExibido);
+        var leitor = new LeitorDeArquivo(caminhoDoArquivoASerExibido);
+        var listaDePets = leitor.RealizaLeitura();
 
         Console.WriteLine("----- Serão importados os dados abaixo -----");
         listaDePets.ForEach(Console.WriteLine);

@@ -23,8 +23,8 @@ internal class Import : IComando
 
     private async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
     {
-        LeitorDeArquivo leitor = new();
-        var listaDePet = leitor.RealizaLeitura(caminhoDoArquivoDeImportacao);
+        var leitor = new LeitorDeArquivo(caminhoDoArquivoDeImportacao);
+        var listaDePet = leitor.RealizaLeitura();
 
         foreach (var pet in listaDePet)
         {

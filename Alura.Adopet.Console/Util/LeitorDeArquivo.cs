@@ -1,16 +1,24 @@
 ﻿namespace Alura.Adopet.Console;
 
-using Alura.Adopet.Console.Util;
-using System;
-
-internal class LeitorDeArquivo
+public class LeitorDeArquivo
 {
-    public List<Pet> RealizaLeitura(string caminhoDoArquivoASerLido)
+    private string? _caminhoDoArquivo;
+
+    public LeitorDeArquivo(string? caminhoDoArquivo)
     {
+        _caminhoDoArquivo = caminhoDoArquivo;
+    }
+
+    public List<Pet>? RealizaLeitura()
+    {
+
+        if (string.IsNullOrEmpty(_caminhoDoArquivo)) return null;
+
         var listaDePets = new List<Pet>();
 
         // Cria uma instância de StreamReader para ler o arquivo
-        using StreamReader sr = new(caminhoDoArquivoASerLido);
+        using StreamReader sr = new(_caminhoDoArquivo);
+
 
         while (!sr.EndOfStream)
         {

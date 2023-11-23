@@ -3,6 +3,7 @@ using Alura.Adopet.Console.Services;
 using Moq;
 using Moq.Protected;
 using System.Net;
+using System.Net.Sockets;
 
 namespace Alura.Adopet.Testes;
 
@@ -60,11 +61,23 @@ public class HttpClientPetTest
     public async Task APIForaDeveRetornarUmaExcecao()
     {
         // Arrange
-        var httpClient = new Mock<HttpClient>(MockBehavior.Default);
+        var handlerMock = new Mock<HttpMessageHandler>();
+
+        handlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>
+                ("SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+            .ThrowsAsync(new SocketException());
+
+        var httpClient = new Mock<HttpClient>(MockBehavior.Default, handlerMock.Object);
+        httpClient.Object.BaseAddress = new Uri("http://localhost:5057");
+
         var httpClientPet = new HttpClientPet(httpClient.Object);
 
         // Act + Assert
-        // Valida se retorna qualquer exceção do tipo HttpRequestException
-        await Assert.ThrowsAnyAsync<HttpRequestException>(async () => await httpClientPet.ListPetsAsync());
+        // Valida se retorna qualquer exceção do tipo SocketException
+        await Assert.ThrowsAnyAsync<SocketException>(() => httpClientPet.ListPetsAsync());
     }
 }
