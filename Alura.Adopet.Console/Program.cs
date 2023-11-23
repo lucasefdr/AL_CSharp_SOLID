@@ -4,7 +4,7 @@ using Alura.Adopet.Console.Services;
 
 Console.ForegroundColor = ConsoleColor.Green;
 
-var httpClientPet = new HttpClientPet();
+var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
 
 var comandosDoSistema = new Dictionary<string, IComando>()
 {
