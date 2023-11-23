@@ -2,7 +2,7 @@
 using Alura.Adopet.Console.Util;
 using System.Reflection;
 
-namespace Alura.Adopet.Testes;
+namespace Alura.Adopet.Testes.UnitTests;
 
 public class GeraDocumentacaoTest
 {

@@ -5,11 +5,12 @@ using Alura.Adopet.Console.Services;
 Console.ForegroundColor = ConsoleColor.Green;
 
 var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
+var leitorDeArquivo = new LeitorDeArquivo(args[1]);
 
 var comandosDoSistema = new Dictionary<string, IComando>()
 {
     {"help", new Help()},
-    {"import", new Import(httpClientPet)},
+    {"import", new Import(httpClientPet, leitorDeArquivo)},
     {"show", new Show()},
     {"list", new List(httpClientPet)}
 };
@@ -22,7 +23,7 @@ try
 
     var comandoDeEntrada = comandosDoSistema[comando];
 
-    await comandoDeEntrada.ExercutarAsync(args);
+    await comandoDeEntrada.ExecutarAsync(args);
 }
 catch (Exception ex)
 {

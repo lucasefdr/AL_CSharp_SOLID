@@ -14,7 +14,7 @@ internal class Help : IComando
         docs = DocumentacaoSistema.ToDictionary(Assembly.GetExecutingAssembly());
     }
 
-    public Task ExercutarAsync(string[] args)
+    public Task ExecutarAsync(string[] args)
     {
         ExibeInformacoesDeAjuda(args);
         return Task.CompletedTask;

@@ -2,7 +2,7 @@
 
 namespace Alura.Adopet.Console.Services;
 
-internal class AdopetAPIClientFactory : IHttpClientFactory
+public class AdopetAPIClientFactory : IHttpClientFactory
 {
     private readonly string _url = "http://localhost:5057";
 

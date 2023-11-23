@@ -7,24 +7,25 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 [DocComando(instrucao: "import", documentacao: "adopet import <arquivo> comando que realiza a importação do arquivo de pets.")]
-internal class Import : IComando
+public class Import : IComando
 {
     private readonly HttpClientPet _httpClientPet;
+    private readonly LeitorDeArquivo _leitorDeArquivo;
 
-    public Import(HttpClientPet httpClientPet)
+    public Import(HttpClientPet httpClientPet, LeitorDeArquivo leitorDeArquivo)
     {
         _httpClientPet = httpClientPet;
+        _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public async Task ExercutarAsync(string[] args)
+    public async Task ExecutarAsync(string[] args)
     {
         await ImportacaoArquivoPetAsync(args[1]);
     }
 
     private async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
     {
-        var leitor = new LeitorDeArquivo(caminhoDoArquivoDeImportacao);
-        var listaDePet = leitor.RealizaLeitura();
+        var listaDePet = _leitorDeArquivo.RealizaLeitura();
 
         foreach (var pet in listaDePet)
         {

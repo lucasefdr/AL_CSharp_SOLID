@@ -2,5 +2,5 @@
 
 internal interface IComando
 {
-    Task ExercutarAsync(string[] args);
+    Task ExecutarAsync(string[] args);
 }

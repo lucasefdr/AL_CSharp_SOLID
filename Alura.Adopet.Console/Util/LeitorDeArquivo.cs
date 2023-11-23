@@ -9,7 +9,7 @@ public class LeitorDeArquivo
         _caminhoDoArquivo = caminhoDoArquivo;
     }
 
-    public List<Pet>? RealizaLeitura()
+    public virtual List<Pet>? RealizaLeitura()
     {
 
         if (string.IsNullOrEmpty(_caminhoDoArquivo)) return null;

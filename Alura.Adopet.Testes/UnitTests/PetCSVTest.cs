@@ -1,7 +1,7 @@
 ﻿using Alura.Adopet.Console;
 using Alura.Adopet.Console.Util;
 
-namespace Alura.Adopet.Testes;
+namespace Alura.Adopet.Testes.UnitTests;
 
 public class PetCSVTest
 {

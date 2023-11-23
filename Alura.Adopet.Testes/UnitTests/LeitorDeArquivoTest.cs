@@ -1,6 +1,6 @@
 ﻿using Alura.Adopet.Console;
 
-namespace Alura.Adopet.Testes;
+namespace Alura.Adopet.Testes.UnitTests;
 
 public class LeitorDeArquivoTest : IDisposable
 {
