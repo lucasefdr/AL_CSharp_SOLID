@@ -12,7 +12,7 @@ public class HttpClientPet
         _client = client;
     }
 
-    public async Task<HttpResponseMessage> CreatePetAsync(Pet pet)
+    public virtual async Task<HttpResponseMessage> CreatePetAsync(Pet pet)
     {
         HttpResponseMessage? response = null;
         using (response = new HttpResponseMessage())
