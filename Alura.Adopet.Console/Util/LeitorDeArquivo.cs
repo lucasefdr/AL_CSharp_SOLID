@@ -1,4 +1,6 @@
 ﻿namespace Alura.Adopet.Console;
+
+using Alura.Adopet.Console.Util;
 using System;
 
 internal class LeitorDeArquivo
@@ -12,15 +14,12 @@ internal class LeitorDeArquivo
 
         while (!sr.EndOfStream)
         {
-            // Separa linha usando ponto e vírgula
-            string[] propriedades = sr.ReadLine()!.Split(';');
+            var propriedades = sr.ReadLine()!.Split(';');
 
-            // Cria objeto Pet a partir da separação
-            Pet pet = new Pet(Guid.Parse(propriedades[0]),
-                propriedades[1],
-                int.Parse(propriedades[2]) == 1 ? TipoPet.Gato : TipoPet.Cachorro);
+            var pet = new Pet(Guid.Parse(propriedades[0]),
+                              propriedades[1],
+                              int.Parse(propriedades[2]) == 1 ? TipoPet.Gato : TipoPet.Cachorro);
 
-            // Adiciona o pet na lista
             listaDePets.Add(pet);
         }
 

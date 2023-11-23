@@ -7,6 +7,7 @@ public class HttpClientPet
 {
     private readonly HttpClient client;
 
+    // Controlando o cenário para testes = parâmetro default
     public HttpClientPet(string uri = "http://localhost:5057")
     {
         client = ConfiguraHttpClient(uri);
