@@ -1,12 +1,19 @@
 ﻿namespace Alura.Adopet.Console;
 using System.Reflection;
 using System;
-
+using Alura.Adopet.Console.Comandos;
+using System.Threading.Tasks;
 
 [DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informaçãoes de ajuda.\n" +
                                              "aodnet help <NOME_COMANDO> para acessar a ajuda de um comando específico")]
-internal class Help
+internal class Help : IComando
 {
+    public Task ExercutarAsync(string[] args)
+    {
+        ExibeInformacoesDeAjuda(args);
+        return Task.CompletedTask;
+    }
+
     private Dictionary<string, DocComandoAttribute> docs;
 
     // expression body constructor
@@ -15,7 +22,7 @@ internal class Help
             .Select(t => t.GetCustomAttribute<DocComandoAttribute>()!)
             .ToDictionary(d => d.Instrucao);
 
-    public void ExibeInformacoesDeAjuda(string[] entrada)
+    private void ExibeInformacoesDeAjuda(string[] entrada)
     {
         Console.WriteLine("Lista de comandos");
 

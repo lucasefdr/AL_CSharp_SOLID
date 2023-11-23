@@ -3,10 +3,16 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System;
+using Alura.Adopet.Console.Comandos;
 
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
-internal class List
+internal class List : IComando
 {
+    public async Task ExercutarAsync(string[] args)
+    {
+        await ListaPetsAsync();
+    }
+
     HttpClient client;
 
     public List()
@@ -14,7 +20,7 @@ internal class List
         client = ConfiguraHttpClient("http://localhost:5057");
     }
 
-    public async Task ListaPetsAsync()
+    private async Task ListaPetsAsync()
     {
         var pets = await ListPetsAsync();
 
@@ -27,13 +33,13 @@ internal class List
         }
     }
 
-    async Task<IEnumerable<Pet>?> ListPetsAsync()
+    private async Task<IEnumerable<Pet>?> ListPetsAsync()
     {
         HttpResponseMessage response = await client.GetAsync("pet/list");
         return await response.Content.ReadFromJsonAsync<IEnumerable<Pet>>();
     }
 
-    HttpClient ConfiguraHttpClient(string url)
+    private HttpClient ConfiguraHttpClient(string url)
     {
         HttpClient _client = new HttpClient();
         _client.DefaultRequestHeaders.Accept.Clear();
