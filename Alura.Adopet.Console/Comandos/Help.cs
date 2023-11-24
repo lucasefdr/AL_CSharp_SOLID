@@ -35,7 +35,6 @@ public class Help : IComando
     private IEnumerable<string> GeraDocumentacao()
     {
         var resultado = new List<string>();
-        Console.WriteLine("Lista de comandos");
 
         // Se não passou mais nenhum argumento mostra help de todos os comandos
         if (comando is null)

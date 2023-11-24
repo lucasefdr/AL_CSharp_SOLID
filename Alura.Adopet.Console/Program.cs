@@ -1,26 +1,19 @@
-﻿using Alura.Adopet.Console;
-using Alura.Adopet.Console.Comandos;
-using Alura.Adopet.Console.Services;
+﻿using Alura.Adopet.Console.Comandos;
 using Alura.Adopet.Console.UI;
 using FluentResults;
 
-var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
-var leitorDeArquivo = args.Length == 2 ? new LeitorDeArquivo(args[1]) : null;
+// Utiliza o factory para criar o comando
+var comando = ComandosFactory.Create(args);
 
-var comandosDoSistema = new Dictionary<string, IComando>()
+// Executa o comando
+if (comando is not null)
 {
-    {"help", new Help(comando: args[1])},
-    {"import", new Import(httpClientPet, leitorDeArquivo!)},
-    {"show", new Show(leitorDeArquivo!)},
-    {"list", new List(httpClientPet)}
-};
+    var resultado = await comando.ExecutarAsync();
 
-
-var comando = args[0].Trim();
-
-if (!comandosDoSistema.ContainsKey(comando)) ConsoleUI.ExibeResultado(Result.Fail($"O comando {comando} não é válido."));
-
-var comandoDeEntrada = comandosDoSistema[comando];
-var resultado = await comandoDeEntrada.ExecutarAsync();
-ConsoleUI.ExibeResultado(resultado);
-
+    // Exibe o resultado
+    ConsoleUI.ExibeResultado(resultado);
+}
+else
+{
+    ConsoleUI.ExibeResultado(Result.Fail("Comando não encontrado!"));
+}
