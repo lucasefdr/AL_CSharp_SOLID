@@ -7,7 +7,7 @@ using System;
 using System.Threading.Tasks;
 
 [DocComando(instrucao: "show", documentacao: "adopet show <arquivo> comando que exibe no terminal o conteúdo do arquivo importado.")]
-internal class Show : IComando
+public class Show : IComando
 {
     private readonly LeitorDeArquivo _leitorDeArquivo;
 
