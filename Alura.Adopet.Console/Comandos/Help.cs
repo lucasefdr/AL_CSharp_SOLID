@@ -10,17 +10,21 @@ using FluentResults;
                                              "aodnet help <NOME_COMANDO> para acessar a ajuda de um comando específico")]
 public class Help : IComando
 {
-    public Help()
+    private readonly Dictionary<string, DocComandoAttribute> docs;
+    private string? comando;
+
+    public Help(string comando)
     {
         docs = DocumentacaoSistema.ToDictionary(Assembly.GetExecutingAssembly());
+        this.comando = comando;
     }
 
-    public Task<Result> ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync()
     {
         try
         {
             return Task.FromResult(Result.Ok()
-                .WithSuccess(new SuccessWithDocs(GeraDocumentacao(args))));
+                .WithSuccess(new SuccessWithDocs(GeraDocumentacao())));
         }
         catch (Exception exception)
         {
@@ -28,26 +32,22 @@ public class Help : IComando
         }
     }
 
-    private readonly Dictionary<string, DocComandoAttribute> docs;
-
-    private IEnumerable<string> GeraDocumentacao(string[] entrada)
+    private IEnumerable<string> GeraDocumentacao()
     {
         var resultado = new List<string>();
         Console.WriteLine("Lista de comandos");
 
         // Se não passou mais nenhum argumento mostra help de todos os comandos
-        if (entrada.Length == 1)
+        if (comando is null)
         {
             foreach (var doc in docs.Values)
             {
                 resultado.Add(doc.Documentacao);
             }
         }
-        else if (entrada.Length == 2)
+        else
         {
-            var comandoASerExibido = entrada[1];
-
-            if (docs.TryGetValue(comandoASerExibido, out DocComandoAttribute? value))
+            if (docs.TryGetValue(comando, out DocComandoAttribute? value))
             {
                 var comando = value;
                 resultado.Add(comando.Documentacao);

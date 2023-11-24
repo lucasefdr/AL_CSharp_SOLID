@@ -4,5 +4,5 @@ namespace Alura.Adopet.Console.Comandos;
 
 internal interface IComando
 {
-    Task<Result> ExecutarAsync(string[] args);
+    Task<Result> ExecutarAsync();
 }

@@ -18,7 +18,7 @@ internal class List : IComando
         _httpClientPet = httpClientPet;
     }
 
-    public async Task<Result> ExecutarAsync(string[] args)
+    public async Task<Result> ExecutarAsync()
     {
         return await ListaPetsAsync();
     }

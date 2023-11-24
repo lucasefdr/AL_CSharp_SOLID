@@ -10,17 +10,18 @@ using System.Threading.Tasks;
 internal class Show : IComando
 {
     private readonly LeitorDeArquivo _leitorDeArquivo;
+
     public Show(LeitorDeArquivo leitorDeArquivo)
     {
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public Task<Result> ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync()
     {
-        return ExibeConteudoDoArquivo(args[1]);
+        return ExibeConteudoDoArquivo();
     }
 
-    private Task<Result> ExibeConteudoDoArquivo(string caminhoDoArquivoASerExibido)
+    private Task<Result> ExibeConteudoDoArquivo()
     {
         try
         {

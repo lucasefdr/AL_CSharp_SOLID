@@ -20,13 +20,13 @@ public class Import : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public async Task<Result> ExecutarAsync(string[] args)
+    public async Task<Result> ExecutarAsync()
     {
-        return await ImportacaoArquivoPetAsync(args[1]);
+        return await ImportacaoArquivoPetAsync();
 
     }
 
-    private async Task<Result> ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
+    private async Task<Result> ImportacaoArquivoPetAsync()
     {
         try
         {
