@@ -27,7 +27,7 @@ public class ImportIntegrationTest
         string[] args = { "import", "lista.csv" };
 
         // Act
-        await import.ExecutarAsync(args);
+        await import.ExecutarAsync();
 
         // Assert
         var listaPet = await httpClientPet.ListPetsAsync();

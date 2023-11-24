@@ -25,7 +25,7 @@ public class ImportTest
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
 
         // Act
-        await import.ExecutarAsync(args);
+        await import.ExecutarAsync();
 
         // Assert
         httpClientPet.Verify(_ => _.CreatePetAsync(It.IsAny<Pet>()), Times.Never);
@@ -46,7 +46,7 @@ public class ImportTest
 
         /* Act */
         //await Assert.ThrowsAnyAsync<FileNotFoundException>(() => import.ExecutarAsync(args));
-        var resultado = await import.ExecutarAsync(args);
+        var resultado = await import.ExecutarAsync();
 
         /* Assert */
         Assert.True(resultado.IsFailed);
@@ -64,15 +64,13 @@ public class ImportTest
 
         var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
 
-        string[] args = { "import", "lista.csv" };
-
         // Act 
-        var resultado = await import.ExecutarAsync(args);
+        var resultado = await import.ExecutarAsync();
 
         // Assert
         Assert.True(resultado.IsSuccess);
 
         var success = resultado.Successes.First() as SuccessWithPets;
-        Assert.Equal("Romeu", success.Data.First().Nome);
+        Assert.Equal("Romeu", success!.Data.First().Nome);
     }
 }

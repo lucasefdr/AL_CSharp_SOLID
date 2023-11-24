@@ -21,7 +21,7 @@ public class HttpClientPet
         }
     }
 
-    public async Task<IEnumerable<Pet>?> ListPetsAsync()
+    public virtual async Task<IEnumerable<Pet>?> ListPetsAsync()
     {
         var response = await _client.GetAsync("pet/list");
         return await response.Content.ReadFromJsonAsync<IEnumerable<Pet>>();
