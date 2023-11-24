@@ -1,6 +1,7 @@
 ﻿namespace Alura.Adopet.Console;
 
 using Alura.Adopet.Console.Comandos;
+using FluentResults;
 using System;
 using System.Threading.Tasks;
 
@@ -13,10 +14,17 @@ internal class Show : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public Task ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync(string[] args)
     {
-        ExibeConteudoDoArquivo(args[1]);
-        return Task.CompletedTask;
+        try
+        {
+            ExibeConteudoDoArquivo(args[1]);
+            return Task.FromResult(Result.Ok());
+        }
+        catch (Exception excetpion)
+        {
+            return Task.FromResult(Result.Fail(new Error("Exibição falhou!").CausedBy(excetpion)));
+        }
     }
 
     private void ExibeConteudoDoArquivo(string caminhoDoArquivoASerExibido)

@@ -4,6 +4,7 @@ using System;
 using Alura.Adopet.Console.Comandos;
 using System.Threading.Tasks;
 using Alura.Adopet.Console.Util;
+using FluentResults;
 
 [DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informaçãoes de ajuda.\n" +
                                              "aodnet help <NOME_COMANDO> para acessar a ajuda de um comando específico")]
@@ -14,10 +15,17 @@ internal class Help : IComando
         docs = DocumentacaoSistema.ToDictionary(Assembly.GetExecutingAssembly());
     }
 
-    public Task ExecutarAsync(string[] args)
+    public Task<Result> ExecutarAsync(string[] args)
     {
-        ExibeInformacoesDeAjuda(args);
-        return Task.CompletedTask;
+        try
+        {
+            ExibeInformacoesDeAjuda(args);
+            return Task.FromResult(Result.Ok());
+        }
+        catch (Exception exception)
+        {
+            return Task.FromResult(Result.Fail(new Error("Ajuda falhou!").CausedBy(exception)));
+        }
     }
 
     private Dictionary<string, DocComandoAttribute> docs;

@@ -2,6 +2,8 @@
 
 using Alura.Adopet.Console.Comandos;
 using Alura.Adopet.Console.Services;
+using Alura.Adopet.Console.Util;
+using FluentResults;
 using System;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -18,28 +20,31 @@ public class Import : IComando
         _leitorDeArquivo = leitorDeArquivo;
     }
 
-    public async Task ExecutarAsync(string[] args)
+    public async Task<Result> ExecutarAsync(string[] args)
     {
-        await ImportacaoArquivoPetAsync(args[1]);
+        return await ImportacaoArquivoPetAsync(args[1]);
+
     }
 
-    private async Task ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
+    private async Task<Result> ImportacaoArquivoPetAsync(string caminhoDoArquivoDeImportacao)
     {
-        var listaDePet = _leitorDeArquivo.RealizaLeitura();
-
-        foreach (var pet in listaDePet)
+        try
         {
-            Console.WriteLine("Importando: " + pet);
-            try
+            var listaDePet = _leitorDeArquivo.RealizaLeitura()!;
+
+            foreach (var pet in listaDePet)
             {
+                Console.WriteLine("Importando: " + pet);
                 await _httpClientPet.CreatePetAsync(pet);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+
+            Console.WriteLine("Importação concluída!");
+            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePet));
         }
-        Console.WriteLine("Importação concluída!");
+        catch (Exception excpetion)
+        {
+            return Result.Fail(new Error("Importação falhou!").CausedBy(excpetion));
+        }
     }
 }
 

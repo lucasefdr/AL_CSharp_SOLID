@@ -18,7 +18,7 @@ public class ImportIntegrationTest
             new(new Guid("01303089-833f-46ff-9f06-77f9d4f89f1d"), "Romeu", TipoPet.Cachorro)
         };
 
-        var leitorDeArquivo = LeitorDeArquivoBuilder.CriaMock(listaDePets);
+        var leitorDeArquivo = LeitorDeArquivoBuilder.GetMock(listaDePets);
 
         var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
 
