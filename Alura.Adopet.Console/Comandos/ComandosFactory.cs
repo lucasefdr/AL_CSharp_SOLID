@@ -6,6 +6,8 @@ public static class ComandosFactory
 {
     public static IComando? Create(string[] entrada)
     {
+        if (entrada is null || entrada.Length == 0) return null;
+
         // Valida se há segundo argumento
         string? argumento = entrada.Length == 2 ? entrada[1] : null;
 
