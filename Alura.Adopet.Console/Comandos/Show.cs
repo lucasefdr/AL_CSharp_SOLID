@@ -1,6 +1,7 @@
 ﻿namespace Alura.Adopet.Console;
 
 using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.Util;
 using FluentResults;
 using System;
 using System.Threading.Tasks;
@@ -16,22 +17,19 @@ internal class Show : IComando
 
     public Task<Result> ExecutarAsync(string[] args)
     {
-        try
-        {
-            ExibeConteudoDoArquivo(args[1]);
-            return Task.FromResult(Result.Ok());
-        }
-        catch (Exception excetpion)
-        {
-            return Task.FromResult(Result.Fail(new Error("Exibição falhou!").CausedBy(excetpion)));
-        }
+        return ExibeConteudoDoArquivo(args[1]);
     }
 
-    private void ExibeConteudoDoArquivo(string caminhoDoArquivoASerExibido)
+    private Task<Result> ExibeConteudoDoArquivo(string caminhoDoArquivoASerExibido)
     {
-        var listaDePets = _leitorDeArquivo.RealizaLeitura();
-
-        Console.WriteLine("----- Serão importados os dados abaixo -----");
-        listaDePets!.ForEach(Console.WriteLine);
+        try
+        {
+            var listaDePets = _leitorDeArquivo.RealizaLeitura()!;
+            return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithPets(listaDePets, "Exibição realizada com sucesso!")));
+        }
+        catch (Exception excpetion)
+        {
+            return Task.FromResult(Result.Fail(new Error("Exibição falhou!").CausedBy(excpetion)));
+        }
     }
 }

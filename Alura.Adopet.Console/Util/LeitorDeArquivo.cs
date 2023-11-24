@@ -19,7 +19,6 @@ public class LeitorDeArquivo
         // Cria uma instância de StreamReader para ler o arquivo
         using StreamReader sr = new(_caminhoDoArquivo);
 
-
         while (!sr.EndOfStream)
         {
             var propriedades = sr.ReadLine()!.Split(';');

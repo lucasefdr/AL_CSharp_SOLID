@@ -6,6 +6,7 @@ using System;
 using Alura.Adopet.Console.Comandos;
 using Alura.Adopet.Console.Services;
 using FluentResults;
+using Alura.Adopet.Console.Util;
 
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
 internal class List : IComando
@@ -26,16 +27,8 @@ internal class List : IComando
     {
         try
         {
-            var pets = await _httpClientPet.ListPetsAsync();
-
-            if (pets != null)
-            {
-                foreach (var pet in pets)
-                {
-                    Console.WriteLine(pet);
-                }
-            }
-            return Result.Ok();
+            var listaDePets = await _httpClientPet.ListPetsAsync();
+            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets!, "Listagem realizada com sucesso!"));
         }
         catch (Exception exception)
         {

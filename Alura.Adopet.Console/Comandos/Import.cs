@@ -34,12 +34,10 @@ public class Import : IComando
 
             foreach (var pet in listaDePet)
             {
-                Console.WriteLine("Importando: " + pet);
                 await _httpClientPet.CreatePetAsync(pet);
             }
 
-            Console.WriteLine("Importação concluída!");
-            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePet));
+            return Result.Ok().WithSuccess(new SuccessWithPets(listaDePet, "Importação realizada com sucesso!"));
         }
         catch (Exception excpetion)
         {
