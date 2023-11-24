@@ -54,6 +54,7 @@ public class Help : IComando
             else
             {
                 resultado.Add("Comando não encontrado!");
+                throw new ArgumentException();
             }
         }
         return resultado;
