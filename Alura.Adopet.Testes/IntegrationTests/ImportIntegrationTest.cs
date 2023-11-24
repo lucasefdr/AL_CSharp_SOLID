@@ -1,5 +1,6 @@
 ﻿using Alura.Adopet.Console;
 using Alura.Adopet.Console.Services;
+using Alura.Adopet.Testes.Builder;
 using Moq;
 
 namespace Alura.Adopet.Testes.IntegrationTests;
@@ -12,15 +13,12 @@ public class ImportIntegrationTest
     {
         // Arrange
         // Mock LeitorDeArquivo
-        var leitorDeArquivo = new Mock<LeitorDeArquivo>(MockBehavior.Default,
-            It.IsAny<string>());
-
-        var listaDePet = new List<Pet>()
+        var listaDePets = new List<Pet>()
         {
             new(new Guid("01303089-833f-46ff-9f06-77f9d4f89f1d"), "Romeu", TipoPet.Cachorro)
         };
 
-        leitorDeArquivo.Setup(_ => _.RealizaLeitura()).Returns(listaDePet);
+        var leitorDeArquivo = LeitorDeArquivoBuilder.CriaMock(listaDePets);
 
         var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
 

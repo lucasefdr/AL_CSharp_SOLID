@@ -18,7 +18,6 @@ public class HttpClientPet
         using (response = new HttpResponseMessage())
         {
             return await _client.PostAsJsonAsync("pet/add", pet);
-
         }
     }
 

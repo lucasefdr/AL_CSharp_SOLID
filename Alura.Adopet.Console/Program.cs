@@ -11,7 +11,7 @@ var comandosDoSistema = new Dictionary<string, IComando>()
 {
     {"help", new Help()},
     {"import", new Import(httpClientPet, leitorDeArquivo)},
-    {"show", new Show()},
+    {"show", new Show(leitorDeArquivo)},
     {"list", new List(httpClientPet)}
 };
 
