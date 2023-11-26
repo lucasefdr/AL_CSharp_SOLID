@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console.Services;
+using Alura.Adopet.Console.Services.Arquivos;
 
 namespace Alura.Adopet.Console.Comandos;
 
@@ -15,7 +16,7 @@ public static class ComandosFactory
         var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
 
         // Instancia o leitor de arquivo
-        var leitorDeArquivo = new LeitorDeArquivo(argumento);
+        var leitorDeArquivo = new LeitorDeArquivosCSV(argumento);
 
         return entrada[0] switch
         {

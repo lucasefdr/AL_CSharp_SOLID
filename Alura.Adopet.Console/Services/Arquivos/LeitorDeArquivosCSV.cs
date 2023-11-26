@@ -1,15 +1,17 @@
-﻿namespace Alura.Adopet.Console;
+﻿using Alura.Adopet.Console.Services.Abstractions;
 
-public class LeitorDeArquivo
+namespace Alura.Adopet.Console.Services.Arquivos;
+
+public class LeitorDeArquivosCSV : ILeitorDeArquivos
 {
     private string? _caminhoDoArquivo;
 
-    public LeitorDeArquivo(string? caminhoDoArquivo)
+    public LeitorDeArquivosCSV(string? caminhoDoArquivo)
     {
         _caminhoDoArquivo = caminhoDoArquivo;
     }
 
-    public virtual List<Pet>? RealizaLeitura()
+    public virtual IEnumerable<Pet> RealizaLeitura()
     {
 
         if (string.IsNullOrEmpty(_caminhoDoArquivo)) return null;
