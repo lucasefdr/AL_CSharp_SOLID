@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using Alura.Adopet.Console.Modelos;
+using FluentResults;
 
 namespace Alura.Adopet.Console.Util;
 

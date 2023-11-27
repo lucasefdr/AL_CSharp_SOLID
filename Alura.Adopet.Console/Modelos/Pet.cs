@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alura.Adopet.Console.Modelos.Enums;
+namespace Alura.Adopet.Console.Modelos;
 
-namespace Alura.Adopet.Console
+public class Pet(Guid id, string? nome, TipoPet tipo)
 {
-    public class Pet
+    public Guid Id { get; set; } = id;
+    public string? Nome { get; set; } = nome;
+    public TipoPet Tipo { get; set; } = tipo;
+
+    public override string ToString()
     {
-        public Guid Id { get; set; }
-        public string? Nome { get; set; }
-        public TipoPet Tipo { get; set; }
-        public Pet(Guid id, string? nome, TipoPet tipo)
-        {
-            Id = id;
-            Nome = nome;
-            Tipo = tipo;
-        }
-        public override string ToString()
-        {
-            return $"{this.Id} - {this.Nome} - {this.Tipo}";
-        }
+        return $"{Id} - {Nome} - {Tipo}";
     }
 }

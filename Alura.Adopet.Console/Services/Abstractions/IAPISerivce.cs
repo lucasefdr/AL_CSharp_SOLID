@@ -1,7 +1,7 @@
 ﻿namespace Alura.Adopet.Console.Services.Abstractions;
 
-public interface IAPISerivce
+public interface IAPIService<T> where T : class
 {
-    Task<HttpResponseMessage> CreatePetAsync(Pet pet);
-    Task<IEnumerable<Pet>?> ListPetsAsync();
+    Task<HttpResponseMessage> CreateAsync<T>(T obj);
+    Task<IEnumerable<T>?> ListAsync();
 }

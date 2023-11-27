@@ -1,4 +1,5 @@
 ﻿
+using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Services.Abstractions;
 using System.Text.Json;
 

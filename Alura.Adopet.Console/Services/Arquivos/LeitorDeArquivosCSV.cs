@@ -1,4 +1,6 @@
-﻿using Alura.Adopet.Console.Services.Abstractions;
+﻿using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Modelos.Enums;
+using Alura.Adopet.Console.Services.Abstractions;
 
 namespace Alura.Adopet.Console.Services.Arquivos;
 

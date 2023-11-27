@@ -1,4 +1,6 @@
-﻿namespace Alura.Adopet.Console.Services.Abstractions;
+﻿using Alura.Adopet.Console.Modelos;
+
+namespace Alura.Adopet.Console.Services.Abstractions;
 
 public interface ILeitorDeArquivos
 {

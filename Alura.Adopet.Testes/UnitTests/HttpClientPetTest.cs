@@ -1,5 +1,4 @@
-using Alura.Adopet.Console;
-using Alura.Adopet.Console.Services;
+using Alura.Adopet.Console.Services.Http;
 using Moq;
 using Moq.Protected;
 using System.Net;
@@ -47,10 +46,10 @@ public class HttpClientPetTest
 
         httpClient.Object.BaseAddress = new Uri("http://localhost:5057");
 
-        var httpClientPet = new IAPIService(httpClient.Object);
+        var httpClientPet = new HttpClientPet(httpClient.Object);
 
         // Act
-        var lista = await httpClientPet.ListPetsAsync();
+        var lista = await httpClientPet.ListAsync();
 
         // Assert
         Assert.NotNull(lista);
@@ -74,10 +73,10 @@ public class HttpClientPetTest
         var httpClient = new Mock<HttpClient>(MockBehavior.Default, handlerMock.Object);
         httpClient.Object.BaseAddress = new Uri("http://localhost:5057");
 
-        var httpClientPet = new IAPIService(httpClient.Object);
+        var httpClientPet = new HttpClientPet(httpClient.Object);
 
         // Act + Assert
         // Valida se retorna qualquer exceção do tipo SocketException
-        await Assert.ThrowsAnyAsync<SocketException>(() => httpClientPet.ListPetsAsync());
+        await Assert.ThrowsAnyAsync<SocketException>(() => httpClientPet.ListAsync());
     }
 }

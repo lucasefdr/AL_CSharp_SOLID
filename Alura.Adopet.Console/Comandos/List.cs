@@ -2,14 +2,14 @@
 using Alura.Adopet.Console.Services;
 using FluentResults;
 using Alura.Adopet.Console.Util;
+using Alura.Adopet.Console.Services.Abstractions;
+using Alura.Adopet.Console.Modelos;
 
 namespace Alura.Adopet.Console;
 
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
-public class List(IAPIService httpClientPet) : IComando // Primary Constructor
+public class List(IAPIService<Pet> httpClientPet) : IComando // Primary Constructor
 {
-    private readonly IAPIService _httpClientPet = httpClientPet;
-
     public async Task<Result> ExecutarAsync()
     {
         return await ListaPetsAsync();
@@ -19,7 +19,7 @@ public class List(IAPIService httpClientPet) : IComando // Primary Constructor
     {
         try
         {
-            var listaDePets = await _httpClientPet.ListPetsAsync();
+            var listaDePets = await httpClientPet.ListAsync();
             return Result.Ok().WithSuccess(new SuccessWithPets(listaDePets!, "Listagem realizada com sucesso!"));
         }
         catch (Exception exception)

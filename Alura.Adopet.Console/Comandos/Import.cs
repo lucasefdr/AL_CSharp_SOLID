@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Services;
 using Alura.Adopet.Console.Services.Abstractions;
 using Alura.Adopet.Console.Util;
@@ -6,7 +7,7 @@ using FluentResults;
 
 namespace Alura.Adopet.Console;
 [DocComando(instrucao: "import", documentacao: "adopet import <arquivo> comando que realiza a importação do arquivo de pets.")]
-public class Import(IAPIService httpClientPet, ILeitorDeArquivos leitorDeArquivo) : IComando
+public class Import(IAPIService<Pet> httpClientPet, ILeitorDeArquivos leitorDeArquivo) : IComando
 {
     public async Task<Result> ExecutarAsync()
     {
@@ -22,7 +23,7 @@ public class Import(IAPIService httpClientPet, ILeitorDeArquivos leitorDeArquivo
 
             foreach (var pet in listaDePet)
             {
-                await httpClientPet.CreatePetAsync(pet);
+                await httpClientPet.CreateAsync<Pet>(pet);
             }
 
             return Result.Ok().WithSuccess(new SuccessWithPets(listaDePet, "Importação realizada com sucesso!"));

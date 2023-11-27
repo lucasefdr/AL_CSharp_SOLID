@@ -1,4 +1,7 @@
 ﻿
+using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Modelos.Enums;
+
 namespace Alura.Adopet.Console.Util;
 
 public static class PetCSV

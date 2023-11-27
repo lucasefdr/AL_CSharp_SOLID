@@ -1,5 +1,5 @@
 ﻿using Alura.Adopet.Console.Services.Arquivos;
-using Alura.Adopet.Console;
+using Alura.Adopet.Console.Modelos;
 
 namespace Alura.Adopet.Testes.UnitTests.LeitorDeArquivo;
 

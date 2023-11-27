@@ -1,4 +1,4 @@
-﻿using Alura.Adopet.Console;
+﻿using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Services.Arquivos;
 using Moq;
 
