@@ -4,13 +4,13 @@ using System.Text.Json;
 
 namespace Alura.Adopet.Console.Services.Arquivos;
 
-public class LeitorDeArquivosJSON(string caminhoArquivo) : ILeitorDeArquivos
+public class LeitorDeArquivosJSON(string? caminhoArquivo) : ILeitorDeArquivos
 {
-    private readonly string _caminhoArquivo = caminhoArquivo;
-
-    public IEnumerable<Pet> RealizaLeitura()
+    public IEnumerable<Pet>? RealizaLeitura()
     {
-        using var stream = new FileStream(_caminhoArquivo, FileMode.Open, FileAccess.Read);
+        if (string.IsNullOrEmpty(caminhoArquivo)) return null;
+
+        using var stream = new FileStream(caminhoArquivo, FileMode.Open, FileAccess.Read);
 
         return JsonSerializer.Deserialize<IEnumerable<Pet>>(stream) ?? Enumerable.Empty<Pet>();
     }

@@ -2,24 +2,16 @@
 
 namespace Alura.Adopet.Console.Services.Arquivos;
 
-public class LeitorDeArquivosCSV : ILeitorDeArquivos
+public class LeitorDeArquivosCSV(string? caminhoDoArquivo) : ILeitorDeArquivos
 {
-    private string? _caminhoDoArquivo;
-
-    public LeitorDeArquivosCSV(string? caminhoDoArquivo)
+    public virtual IEnumerable<Pet>? RealizaLeitura()
     {
-        _caminhoDoArquivo = caminhoDoArquivo;
-    }
-
-    public virtual IEnumerable<Pet> RealizaLeitura()
-    {
-
-        if (string.IsNullOrEmpty(_caminhoDoArquivo)) return null;
+        if (string.IsNullOrEmpty(caminhoDoArquivo)) return null;
 
         var listaDePets = new List<Pet>();
 
         // Cria uma instância de StreamReader para ler o arquivo
-        using StreamReader sr = new(_caminhoDoArquivo);
+        using StreamReader sr = new(caminhoDoArquivo);
 
         while (!sr.EndOfStream)
         {

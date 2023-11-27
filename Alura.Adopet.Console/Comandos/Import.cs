@@ -6,7 +6,7 @@ using FluentResults;
 
 namespace Alura.Adopet.Console;
 [DocComando(instrucao: "import", documentacao: "adopet import <arquivo> comando que realiza a importação do arquivo de pets.")]
-public class Import(HttpClientPet httpClientPet, ILeitorDeArquivos leitorDeArquivo) : IComando
+public class Import(IAPIService httpClientPet, ILeitorDeArquivos leitorDeArquivo) : IComando
 {
     public async Task<Result> ExecutarAsync()
     {

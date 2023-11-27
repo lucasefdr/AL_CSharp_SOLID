@@ -2,12 +2,12 @@
 
 namespace Alura.Adopet.Console.Services;
 
-public class HttpClientPet
+public class IAPIService
 {
     private readonly HttpClient _client;
 
     // Controlando o cenário para testes = parâmetro default
-    public HttpClientPet(HttpClient client)
+    public IAPIService(HttpClient client)
     {
         _client = client;
     }

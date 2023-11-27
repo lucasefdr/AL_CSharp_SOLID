@@ -6,9 +6,9 @@ using Alura.Adopet.Console.Util;
 namespace Alura.Adopet.Console;
 
 [DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
-public class List(HttpClientPet httpClientPet) : IComando // Primary Constructor
+public class List(IAPIService httpClientPet) : IComando // Primary Constructor
 {
-    private readonly HttpClientPet _httpClientPet = httpClientPet;
+    private readonly IAPIService _httpClientPet = httpClientPet;
 
     public async Task<Result> ExecutarAsync()
     {

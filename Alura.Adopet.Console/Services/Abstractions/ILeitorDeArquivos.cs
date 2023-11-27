@@ -2,5 +2,5 @@
 
 public interface ILeitorDeArquivos
 {
-    IEnumerable<Pet> RealizaLeitura();
+    IEnumerable<Pet>? RealizaLeitura();
 }

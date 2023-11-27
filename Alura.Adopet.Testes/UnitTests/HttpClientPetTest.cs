@@ -47,7 +47,7 @@ public class HttpClientPetTest
 
         httpClient.Object.BaseAddress = new Uri("http://localhost:5057");
 
-        var httpClientPet = new HttpClientPet(httpClient.Object);
+        var httpClientPet = new IAPIService(httpClient.Object);
 
         // Act
         var lista = await httpClientPet.ListPetsAsync();
@@ -74,7 +74,7 @@ public class HttpClientPetTest
         var httpClient = new Mock<HttpClient>(MockBehavior.Default, handlerMock.Object);
         httpClient.Object.BaseAddress = new Uri("http://localhost:5057");
 
-        var httpClientPet = new HttpClientPet(httpClient.Object);
+        var httpClientPet = new IAPIService(httpClient.Object);
 
         // Act + Assert
         // Valida se retorna qualquer exceção do tipo SocketException
