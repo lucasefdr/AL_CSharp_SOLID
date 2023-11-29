@@ -14,7 +14,7 @@ public static class ComandosFactory
         string? argumento = entrada.Length == 2 ? entrada[1] : null;
 
         // Instancia o HttpClientPet
-        var httpClientPet = new HttpClientPet(new AdopetAPIClientFactory().CreateClient("adopet"));
+        var httpClientPet = new PetService(new AdopetAPIClientFactory().CreateClient("adopet"));
 
         // Instancia o leitor de arquivo
         var leitorDeArquivo = LeitorDeArquivosFactory.CreatePetFrom(argumento);

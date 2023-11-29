@@ -12,7 +12,6 @@ public class Import(IAPIService<Pet> httpClientPet, ILeitorDeArquivos leitorDeAr
     public async Task<Result> ExecutarAsync()
     {
         return await ImportacaoArquivoPetAsync();
-
     }
 
     private async Task<Result> ImportacaoArquivoPetAsync()

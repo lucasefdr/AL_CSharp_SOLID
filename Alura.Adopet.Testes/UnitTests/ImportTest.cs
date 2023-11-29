@@ -29,7 +29,7 @@ public class ImportTest
         await import.ExecutarAsync();
 
         // Assert
-        httpClientPet.Verify(_ => _.CreatePetAsync(It.IsAny<Pet>()), Times.Never);
+        httpClientPet.Verify(_ => _.CreateAsync(It.IsAny<Pet>()), Times.Never);
     }
 
     [Fact]
