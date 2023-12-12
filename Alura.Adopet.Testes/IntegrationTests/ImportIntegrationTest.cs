@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console;
+using Alura.Adopet.Console.Comandos.Imports;
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Modelos.Enums;
 using Alura.Adopet.Console.Services;
@@ -25,7 +26,7 @@ public class ImportIntegrationTest
 
         var httpClientPet = new PetService(new AdopetAPIClientFactory().CreateClient("adopet"));
 
-        var import = new Import(httpClientPet, leitorDeArquivo.Object);
+        var import = new ImportPets(httpClientPet, leitorDeArquivo.Object);
 
         string[] args = { "import", "lista.csv" };
 

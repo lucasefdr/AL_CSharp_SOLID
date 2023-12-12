@@ -1,10 +1,10 @@
 ﻿namespace Alura.Adopet.Console;
 using System.Reflection;
 using System;
-using Alura.Adopet.Console.Comandos;
 using System.Threading.Tasks;
 using Alura.Adopet.Console.Util;
 using FluentResults;
+using Alura.Adopet.Console.Comandos.Interfaces;
 
 [DocComando(instrucao: "help", documentacao: "adopet help comando que exibe informaçãoes de ajuda.\n" +
                                              "aodnet help <NOME_COMANDO> para acessar a ajuda de um comando específico")]
@@ -13,7 +13,7 @@ public class Help : IComando
     private readonly Dictionary<string, DocComandoAttribute> docs;
     private string? comando;
 
-    public Help(string comando)
+    public Help(string? comando)
     {
         docs = DocumentacaoSistema.ToDictionary(Assembly.GetExecutingAssembly());
         this.comando = comando;

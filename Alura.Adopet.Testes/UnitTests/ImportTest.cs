@@ -1,4 +1,5 @@
 ﻿using Alura.Adopet.Console;
+using Alura.Adopet.Console.Comandos.Imports;
 using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Services;
 using Alura.Adopet.Console.Util;
@@ -23,7 +24,7 @@ public class ImportTest
         // Mock para simular conexão
         var httpClientPet = HttpClientPetBuilder.GetMock();
 
-        var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
+        var import = new ImportPets(httpClientPet.Object, leitorDeArquivo.Object);
 
         // Act
         await import.ExecutarAsync();
@@ -43,7 +44,7 @@ public class ImportTest
 
         var httpClientPet = HttpClientPetBuilder.GetMock();
 
-        var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
+        var import = new ImportPets(httpClientPet.Object, leitorDeArquivo.Object);
 
         /* Act */
         //await Assert.ThrowsAnyAsync<FileNotFoundException>(() => import.ExecutarAsync(args));
@@ -63,7 +64,7 @@ public class ImportTest
 
         var httpClientPet = HttpClientPetBuilder.GetMock();
 
-        var import = new Import(httpClientPet.Object, leitorDeArquivo.Object);
+        var import = new ImportPets(httpClientPet.Object, leitorDeArquivo.Object);
 
         // Act 
         var resultado = await import.ExecutarAsync();

@@ -2,16 +2,15 @@
 
 namespace Alura.Adopet.Console.Services.Http;
 
-public class AdopetAPIClientFactory : IHttpClientFactory
+public class AdopetAPIClientFactory(string url) : IHttpClientFactory
 {
-    private readonly string _url = "http://localhost:5057";
 
     public HttpClient CreateClient(string name)
     {
-        HttpClient _client = new HttpClient();
+        HttpClient _client = new();
         _client.DefaultRequestHeaders.Accept.Clear();
         _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        _client.BaseAddress = new Uri(_url);
+        _client.BaseAddress = new Uri(url);
         return _client;
     }
 }

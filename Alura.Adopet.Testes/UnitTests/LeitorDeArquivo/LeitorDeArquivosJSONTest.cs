@@ -1,5 +1,6 @@
 ﻿using Alura.Adopet.Console.Services.Arquivos;
 using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Services.Arquivos.JSON;
 
 namespace Alura.Adopet.Testes.UnitTests.LeitorDeArquivo;
 
@@ -45,7 +46,7 @@ public class LeitorDeArquivosJSONTest : IDisposable
     {
         /* ARRANGE + ACT */
         // Realiza a leitura do arquivo e retorna uma lista de pets
-        IEnumerable<Pet> listaDePets = new LeitorDeArquivosJSON(_caminhoArquivo).RealizaLeitura();
+        IEnumerable<Pet> listaDePets = new PetsJSON(_caminhoArquivo).RealizaLeitura();
 
         /* ASSERT */
         Assert.NotNull(listaDePets);

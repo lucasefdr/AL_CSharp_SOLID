@@ -1,6 +1,7 @@
-﻿namespace Alura.Adopet.Console;
+﻿namespace Alura.Adopet.Console.Comandos.Shows;
 
-using Alura.Adopet.Console.Comandos;
+using Alura.Adopet.Console.Comandos.Interfaces;
+using Alura.Adopet.Console.Modelos;
 using Alura.Adopet.Console.Services.Abstractions;
 using Alura.Adopet.Console.Services.Arquivos;
 using Alura.Adopet.Console.Util;
@@ -8,11 +9,9 @@ using FluentResults;
 using System;
 using System.Threading.Tasks;
 
-[DocComando(instrucao: "show", documentacao: "adopet show <arquivo> comando que exibe no terminal o conteúdo do arquivo importado.")]
-public class Show(ILeitorDeArquivos leitorDeArquivo) : IComando
+[DocComando(instrucao: "show-pets", documentacao: "adopet show-pets <arquivo> comando que exibe no terminal o conteúdo do arquivo importado.")]
+public class ShowPets(ILeitorDeArquivos<Pet> leitorDeArquivo) : IComando
 {
-    private readonly ILeitorDeArquivos _leitorDeArquivo = leitorDeArquivo;
-
     public Task<Result> ExecutarAsync()
     {
         return ExibeConteudoDoArquivo();
@@ -22,7 +21,7 @@ public class Show(ILeitorDeArquivos leitorDeArquivo) : IComando
     {
         try
         {
-            var listaDePets = _leitorDeArquivo.RealizaLeitura()!;
+            var listaDePets = leitorDeArquivo.RealizaLeitura()!;
             return Task.FromResult(Result.Ok().WithSuccess(new SuccessWithPets(listaDePets, "Exibição realizada com sucesso!")));
         }
         catch (Exception excpetion)

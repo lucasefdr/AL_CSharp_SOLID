@@ -1,14 +1,14 @@
-﻿using Alura.Adopet.Console.Comandos;
-using Alura.Adopet.Console.Services;
+﻿using Alura.Adopet.Console.Services;
 using FluentResults;
 using Alura.Adopet.Console.Util;
 using Alura.Adopet.Console.Services.Abstractions;
 using Alura.Adopet.Console.Modelos;
+using Alura.Adopet.Console.Comandos.Interfaces;
 
-namespace Alura.Adopet.Console;
+namespace Alura.Adopet.Console.Comandos.Lists;
 
-[DocComando(instrucao: "list", documentacao: "adopet list comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
-public class List(IAPIService<Pet> httpClientPet) : IComando // Primary Constructor
+[DocComando(instrucao: "list-pets", documentacao: "adopet list-pets comando que exibe no terminal o conteúdo cadastrado na base de dados do AdoPet.")]
+public class ListPets(IAPIService<Pet> httpClientPet) : IComando // Primary Constructor
 {
     public async Task<Result> ExecutarAsync()
     {

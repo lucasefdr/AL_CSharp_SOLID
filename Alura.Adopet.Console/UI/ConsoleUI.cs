@@ -38,6 +38,9 @@ public static class ConsoleUI
             case SuccessWithDocs successWithDocs:
                 ExibeDocs(successWithDocs);
                 break;
+            case SuccessWithClientes successWithClientes:
+                ExibeClientes(successWithClientes);
+                break;
         }
     }
 
@@ -53,6 +56,12 @@ public static class ConsoleUI
     {
         foreach (var pet in successWithPets.Data) System.Console.WriteLine(pet);
         System.Console.WriteLine(successWithPets.Message);
+    }
+
+    private static void ExibeClientes(SuccessWithClientes successWithClientes)
+    {
+        foreach (var cliente in successWithClientes.Data) System.Console.WriteLine(cliente);
+        System.Console.WriteLine(successWithClientes.Message);
     }
 
     private static void ExibeFalha(Result result)

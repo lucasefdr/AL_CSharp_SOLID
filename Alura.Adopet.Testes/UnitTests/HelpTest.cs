@@ -22,7 +22,8 @@ public class HelpTest
     [InlineData("help")]
     [InlineData("show")]
     [InlineData("list")]
-    [InlineData("import")]
+    [InlineData("import-clientes")]
+    [InlineData("import-pets")]
     public async Task QuandoComandoExistirDeveRetornarSucesso(string comando)
     {
         // Arrange  
@@ -34,6 +35,5 @@ public class HelpTest
         // Assert   
         Assert.NotNull(resultado);
         Assert.True(resultado.IsSuccess);
-
     }
 }

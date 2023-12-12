@@ -4,9 +4,9 @@ using Moq.Protected;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Alura.Adopet.Testes.UnitTests;
+namespace Alura.Adopet.Testes.UnitTests.Services;
 
-public class HttpClientPetTest
+public class PetServiceTest
 {
     [Fact]
     public async Task ListaPetsDeveRetornarUmaListaNaoVazia()
